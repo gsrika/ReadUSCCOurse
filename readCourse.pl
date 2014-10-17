@@ -3,11 +3,11 @@ import MySQLdb
 
 def insert_data(dept,cname,prefix,code,insname,term,year,intro):
 	pid=cname+"_"+prefix+"_"+code+"_"+insname+"_"+term+"_"+str(year)
-	querystring="Insert into suggest_course  values ('%s','%s','%s','%s','%s','%s','%s','%s','%s')" %(pid,dept,cname,prefix,code,insname,term,year,intro)
+	querystring="Insert into suggest_course_unique  values ('%s','%s','%s','%s','%s','%s','%s','%s','%s')" %(pid,dept,cname,prefix,code,insname,term,year,intro)
 	#print querystring
 	#querytemp=querystring.replace("suggest_dump","suggest_temp")
 	try:
-		db=MySQLdb.connect(host="localhost",user="root",passwd="srikanth",db="test")
+		db=MySQLdb.connect(host="localhost",user="root",db="test")
 	   	cur=db.cursor()
 		a="printval"
 		cur.execute(querystring)
@@ -117,7 +117,8 @@ def get_parentdata(baseurl):
 				codelist.append(di['department']['code'])
 		
 	for code in codelist:
-		url="http://web-app.usc.edu/ws/soc/api/classes/"+code+"/20141"
+		print code
+		url="http://web-app.usc.edu/web/soc/api/classes/"+code+"/20143"
 		get_data(url)	
 		
 		
@@ -126,7 +127,7 @@ def get_parentdata(baseurl):
 
 
 import pdb
-baseurl="http://web-app.usc.edu/ws/soc/api/depts/20131"
+baseurl="http://web-app.usc.edu/web/soc/api/depts/20143"
 get_parentdata(baseurl)
 url="http://web-app.usc.edu/ws/soc/api/classes/csci/20141"
 #get_data(url)
